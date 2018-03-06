@@ -16,7 +16,7 @@ class RoleSeeder extends Seeder
         /** @var Collection $roles */
         $roles = Role::all();
 
-        $expectedRoles = ['guest', 'host', 'admin'];
+        $expectedRoles = Role::ROLES;
 
         foreach ($expectedRoles as $expectedRole) {
             $role = $roles->first(function (Role $indvRole) use ($expectedRole) {

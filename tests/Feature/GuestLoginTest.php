@@ -3,11 +3,12 @@
 namespace Tests\Feature;
 
 
+use App\Models\Role;
+
 class GuestLoginTest extends TestAuthCase
 {
     private $guestHomeUrl = '/guest/home';
     private $loginUrl = '/guest/login';
-    private $correctEmail = 'testGuest@jamesspencemilwaukee.com';
     private $correctPassword = 'secret';
 
     public function testGuestHomeRedirect()
@@ -42,7 +43,7 @@ class GuestLoginTest extends TestAuthCase
         $this->createUser();
 
         $response = $this->post($this->loginUrl, [
-            'email' => $this->correctEmail,
+            'email' => $this->getCorrectEmail(),
             'password' => 'incorrectPassword'
         ]);
         $response->assertStatus(422)
@@ -68,7 +69,7 @@ class GuestLoginTest extends TestAuthCase
         $this->createUser();
 
         $response = $this->post($this->loginUrl, [
-            'email' => $this->correctEmail,
+            'email' => $this->getCorrectEmail(),
             'password' => $this->correctPassword
         ]);
 
@@ -80,6 +81,6 @@ class GuestLoginTest extends TestAuthCase
      */
     protected function getCorrectRole(): string
     {
-        return 'guest';
+        return Role::GUEST_ROLE;
     }
 }

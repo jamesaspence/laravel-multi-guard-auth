@@ -4,6 +4,7 @@
 namespace Tests\Feature;
 
 
+use App\Models\Role;
 use App\Models\User;
 
 class GuestRegistrationTest extends TestAuthCase
@@ -81,6 +82,6 @@ class GuestRegistrationTest extends TestAuthCase
      */
     protected function getCorrectRole(): string
     {
-        return 'guest';
+        return Role::GUEST_ROLE;
     }
 }
