@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * @property string email
  * @property Collection roles
+ * @property string name
  */
 class User extends Authenticatable
 {
