@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Guard;
+namespace App\Auth\Guard;
 
 use Illuminate\Auth\SessionGuard;
 

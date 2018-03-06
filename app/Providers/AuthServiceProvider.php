@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Auth\Guard\RoleBasedSessionGuard;
 use App\Auth\Provider\RoleBasedUserProvider;
 use App\Models\User;
 use Illuminate\Auth\AuthManager;
@@ -10,7 +11,6 @@ use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Guard\RoleBasedSessionGuard;
 
 class AuthServiceProvider extends ServiceProvider
 {

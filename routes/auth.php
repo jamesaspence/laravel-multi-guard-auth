@@ -4,8 +4,12 @@ Route::middleware(['web', 'auth'])->group(function () {
 });
 
 Route::prefix('guest')->group(function () {
-    Route::get('login', 'GuestAuthController@showLoginForm')->name('guest-login');
-    Route::post('login', 'GuestAuthController@login');
-    Route::get('register', 'GuestAuthController@showRegistrationForm')->name('guest-register');
-    Route::post('register', 'GuestAuthController@register')->name('guest-register');
+    Route::namespace('Login')->group(function () {
+        Route::get('login', 'GuestLoginController@showLoginForm')->name('guest-login');
+        Route::post('login', 'GuestLoginController@login');
+    });
+    Route::namespace('Register')->group(function () {
+        Route::get('register', 'GuestLoginController@showRegistrationForm')->name('guest-register');
+        Route::post('register', 'GuestLoginController@register')->name('guest-register');
+    });
 });

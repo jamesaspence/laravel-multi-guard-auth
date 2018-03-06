@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Auth\Login;
 
 use App\Models\Role;
 
-class GuestAuthController extends AbstractLoginController
+class GuestLoginController extends AbstractLoginController
 {
     /**
      * {@inheritdoc}
