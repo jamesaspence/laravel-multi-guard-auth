@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Role;
+
 return [
 
     /*
@@ -37,8 +39,20 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
+            'driver' => 'role',
             'provider' => 'users',
+        ],
+        Role::ADMIN_ROLE => [
+            'driver' => 'role',
+            'provider' => Role::ADMIN_ROLE
+        ],
+        Role::GUEST_ROLE => [
+            'driver' => 'role',
+            'provider' => Role::GUEST_ROLE
+        ],
+        Role::HOST_ROLE => [
+            'driver' => 'role',
+            'provider' => Role::HOST_ROLE
         ],
 
         'api' => [
@@ -69,11 +83,18 @@ return [
             'driver' => 'eloquent',
             'model' => \App\Models\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        Role::ADMIN_ROLE => [
+            'driver' => 'role',
+            'role' => Role::ADMIN_ROLE
+        ],
+        Role::GUEST_ROLE => [
+            'driver' => 'role',
+            'role' => Role::GUEST_ROLE
+        ],
+        Role::HOST_ROLE => [
+            'driver' => 'role',
+            'role' => Role::HOST_ROLE
+        ]
     ],
 
     /*
