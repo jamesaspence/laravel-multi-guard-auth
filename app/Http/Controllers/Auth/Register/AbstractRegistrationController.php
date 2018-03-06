@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth\Register;
 
+use App\Http\Controllers\Auth\HandlesRoleBasedAuth;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Hash;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Validator;
 
-class RegisterController extends Controller
+abstract class AbstractRegistrationController extends Controller implements HandlesRoleBasedAuth
 {
     /*
     |--------------------------------------------------------------------------
-    | Register Controller
+    | Registration Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles the registration of new users as well as their
@@ -23,21 +24,25 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function showRegistrationForm()
+    {
+        return view($this->getAuthViewName());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function guard()
+    {
+        return \Auth::guard($this->getGuardName());
     }
 
     /**
