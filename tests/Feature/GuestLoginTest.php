@@ -15,13 +15,13 @@ class GuestLoginTest extends TestAuthCase
     {
         $response = $this->get($this->guestHomeUrl);
 
-        $response->assertRedirect($this->loginUrl);
+        $response->assertRedirect('http://multiguard.test/login');
     }
 
     public function testGuestLoginValidation()
     {
         $response = $this->post($this->loginUrl);
-        $response->assertStatus(422)
+        $response->assertRedirect('/')
             ->assertSessionHasErrors(['email', 'password']);
     }
 
@@ -34,7 +34,8 @@ class GuestLoginTest extends TestAuthCase
             'email' => $incorrectEmail,
             'password' => $this->correctPassword
         ]);
-        $response->assertStatus(422)
+
+        $response->assertRedirect('/')
             ->assertSessionHasErrors(['email']);
     }
 
@@ -46,7 +47,7 @@ class GuestLoginTest extends TestAuthCase
             'email' => $this->getCorrectEmail(),
             'password' => 'incorrectPassword'
         ]);
-        $response->assertStatus(422)
+        $response->assertRedirect('/')
             ->assertSessionHasErrors(['email']);
     }
 
@@ -60,7 +61,7 @@ class GuestLoginTest extends TestAuthCase
             'password' => $this->correctPassword
         ]);
 
-        $response->assertStatus(422)
+        $response->assertRedirect('/')
             ->assertSessionHasErrors(['email']);
     }
 
@@ -74,6 +75,7 @@ class GuestLoginTest extends TestAuthCase
         ]);
 
         $response->assertRedirect($this->guestHomeUrl);
+        //TODO find better way to write this test
     }
 
     /**
