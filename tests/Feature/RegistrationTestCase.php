@@ -6,7 +6,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 
-abstract class RegistrationTestCase extends TestAuthCase
+abstract class RegistrationTestCase extends AuthTestCase
 {
     public function testRegistrationFormLoads()
     {

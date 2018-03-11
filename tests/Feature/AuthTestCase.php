@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-abstract class TestAuthCase extends TestCase
+abstract class AuthTestCase extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;

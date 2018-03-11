@@ -4,7 +4,7 @@
 namespace Tests\Feature;
 
 
-abstract class LoginTestCase extends TestAuthCase
+abstract class LoginTestCase extends AuthTestCase
 {
 
     public function testGuestHomeRedirect()
