@@ -16,14 +16,23 @@ abstract class TestAuthCase extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
+    abstract protected function getCorrectRole(): string;
+
+    abstract protected function getFormUrl(): string;
+
+    abstract protected function getSuccessUrl(): string;
+
+    protected function getCorrectPassword(): string
+    {
+        return 'secret';
+    }
+
     protected function getCorrectEmail(): string
     {
         return 'test' . Str::ucfirst($this->getCorrectRole()) . '@jamesspencemilwaukee.com';
     }
 
-    abstract protected function getCorrectRole(): string;
-
-    protected function createUser($email = null, $role = null)
+    protected function createUser($email = null, $role = null): User
     {
         $email = $email ?? $this->getCorrectEmail();
 
@@ -37,7 +46,7 @@ abstract class TestAuthCase extends TestCase
         return $user;
     }
 
-    protected function createRole($role = null)
+    protected function createRole($role = null): Role
     {
         $role = $role ?? $this->getCorrectRole();
 
