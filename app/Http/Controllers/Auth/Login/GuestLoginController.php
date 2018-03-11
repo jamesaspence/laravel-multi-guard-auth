@@ -21,7 +21,7 @@ class GuestLoginController extends AbstractLoginController
      */
     public function getAuthViewName(): string
     {
-        return 'auth.login';
+        return 'auth.guest.login';
     }
 
     /**

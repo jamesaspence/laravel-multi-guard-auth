@@ -14,7 +14,7 @@ class GuestRegistrationController extends AbstractRegistrationController
      */
     public function getAuthViewName(): string
     {
-        return 'auth.register';
+        return 'auth.guest.register';
     }
 
     /**
