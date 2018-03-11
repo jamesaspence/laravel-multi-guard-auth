@@ -19,29 +19,30 @@ class LogoutControllerTest extends TestCase
 
     public function testGuestLogoutSuccess()
     {
-        $this->createAndSetUser(Role::GUEST_ROLE);
-
-        $response = $this->post(route('logout'));
-
-        $response->assertRedirect(route('guest-login'));
+        $this->runLogoutTest(Role::GUEST_ROLE);
     }
 
     public function testHostLogoutSuccess()
     {
-        $this->createAndSetUser(Role::HOST_ROLE);
-
-        $response = $this->post(route('logout'));
-
-        $response->assertRedirect(route('host-login'));
+        $this->runLogoutTest(Role::HOST_ROLE);
     }
 
     public function testAdminLogoutSuccess()
     {
-        $this->createAndSetUser(Role::ADMIN_ROLE);
+        $this->runLogoutTest(Role::ADMIN_ROLE);
+    }
+
+    private function runLogoutTest($roleName)
+    {
+        $this->createAndSetUser($roleName);
+
+        $this->assertNotNull(\Auth::user());
 
         $response = $this->post(route('logout'));
 
-        $response->assertRedirect(route('admin-login'));
+        $response->assertRedirect(route($roleName . '-login'));
+
+        $this->assertNull(\Auth::user());
     }
 
     private function createAndSetUser($roleName)

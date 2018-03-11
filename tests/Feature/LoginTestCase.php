@@ -65,6 +65,7 @@ abstract class LoginTestCase extends AuthTestCase
     public function testGuestLoginSuccess()
     {
         $this->createUser();
+        $this->assertNull(\Auth::user());
 
         $response = $this->post($this->getFormUrl(), [
             'email' => $this->getCorrectEmail(),
@@ -72,6 +73,6 @@ abstract class LoginTestCase extends AuthTestCase
         ]);
 
         $response->assertRedirect($this->getSuccessUrl());
-        //TODO find better way to write this test
+        $this->assertNotNull(\Auth::user());
     }
 }
