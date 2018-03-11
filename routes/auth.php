@@ -7,7 +7,7 @@ Route::redirect('login', '/guest/login')
     ->name('login');
 
 Route::middleware('auth')->group(function () {
-    Route::post('logout', 'Auth\LogoutController@logout')->name('logout');
+    Route::post('logout', 'LogoutController@logout')->name('logout');
 });
 
 Route::prefix('guest')->group(function () {
@@ -22,7 +22,7 @@ Route::prefix('guest')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::get('home', function () {
-            return 'Home!';
+            return view('home');
         })->name('guest-home');
     });
 });
@@ -39,7 +39,7 @@ Route::prefix('host')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::get('home', function () {
-            return 'Home!';
+            return view('home');
         })->name('host-home');
     });
 });
@@ -56,7 +56,7 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::get('home', function () {
-            return 'Home!';
+            return view('home');
         })->name('admin-home');
     });
 });
