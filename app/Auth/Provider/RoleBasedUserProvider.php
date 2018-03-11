@@ -99,6 +99,6 @@ class RoleBasedUserProvider extends EloquentUserProvider
             ->select('users.*')
             ->join('role_user', 'users.id', '=', 'role_user.user_id')
             ->join('roles', 'role_user.role_id', '=', 'roles.id')
-            ->where('roles.role', '=', $this->getRole());
+            ->where('roles.name', '=', $this->getRole());
     }
 }
