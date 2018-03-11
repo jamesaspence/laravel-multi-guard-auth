@@ -31,4 +31,12 @@ class GuestLoginTest extends LoginTestCase
     {
         return route('guest-home');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getIncorrectRole(): string
+    {
+        return Role::HOST_ROLE;
+    }
 }

@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 abstract class LoginTestCase extends AuthTestCase
 {
+    abstract protected function getIncorrectRole(): string;
 
     public function testGuestHomeRedirect()
     {
@@ -50,7 +51,7 @@ abstract class LoginTestCase extends AuthTestCase
     public function testGuestLoginIncorrectLoginType()
     {
         $incorrectEmail = 'testAdmin@jamesspencemilwaukee.com';
-        $this->createUser($incorrectEmail, 'admin');
+        $this->createUser($incorrectEmail, $this->getIncorrectRole());
 
         $response = $this->post($this->getFormUrl(), [
             'email' => $incorrectEmail,
