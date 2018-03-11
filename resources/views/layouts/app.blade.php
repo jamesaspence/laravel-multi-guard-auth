@@ -34,8 +34,12 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link" href="{{ route('guest-login') }}">Login</a></li>
-                            <li><a class="nav-link" href="{{ route('guest-register') }}">Register</a></li>
+                            <li><a class="nav-link" href="{{ route('guest-login') }}">Guest Login</a></li>
+                            <li><a class="nav-link" href="{{ route('guest-register') }}">Guest Register</a></li>
+                            <li><a class="nav-link" href="{{ route('host-login') }}">Host Login</a></li>
+                            <li><a class="nav-link" href="{{ route('host-register') }}">Host Register</a></li>
+                            <li><a class="nav-link" href="{{ route('admin-login') }}">Admin Login</a></li>
+                            <li><a class="nav-link" href="{{ route('admin-register') }}">Admin Register</a></li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
