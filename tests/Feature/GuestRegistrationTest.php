@@ -9,19 +9,24 @@ use App\Models\User;
 
 class GuestRegistrationTest extends TestAuthCase
 {
-
     private $registerUrl = '/guest/register';
+
+    public function testRegistrationFormLoads()
+    {
+        $response = $this->get($this->registerUrl);
+
+        $this->assertTrue($response->isSuccessful() || $response->isRedirection());
+    }
 
     public function testRegistrationValidation()
     {
         $response = $this->post($this->registerUrl);
 
-        $response->assertStatus(422)
+        $response->assertRedirect('/')
             ->assertSessionHasErrors([
                 'name',
                 'email',
-                'password',
-                'confirm_password'
+                'password'
             ]);
     }
 
@@ -33,10 +38,10 @@ class GuestRegistrationTest extends TestAuthCase
             'name' => $this->faker()->name(),
             'email' => $this->getCorrectEmail(),
             'password' => 'secret',
-            'confirm_password' => 'secret'
+            'password_confirmation' => 'secret'
         ]);
 
-        $response->assertStatus(422)
+        $response->assertRedirect('/')
             ->assertSessionHasErrors([
                 'email'
             ]);
@@ -48,24 +53,25 @@ class GuestRegistrationTest extends TestAuthCase
             'name' => $this->faker()->name(),
             'email' => $this->getCorrectEmail(),
             'password' => 'secret',
-            'confirm_password' => 'notSecret'
+            'password_confirmation' => 'notSecret'
         ]);
 
-        $response->assertStatus(422)
+        $response->assertRedirect('/')
             ->assertSessionHasErrors([
-                'password',
-                'confirm_password'
+                'password' => 'The password confirmation does not match.'
             ]);
     }
 
     public function testRegistrationSuccess()
     {
+        $this->createRole($this->getCorrectRole());
+
         $name = $this->faker()->name();
         $response = $this->post($this->registerUrl, [
             'name' => $name,
             'email' => $this->getCorrectEmail(),
             'password' => 'secret',
-            'confirm_password' => 'secret'
+            'password_confirmation' => 'secret'
         ]);
 
         $this->assertTrue($response->isSuccessful() || $response->isRedirection());
