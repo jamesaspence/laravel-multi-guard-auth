@@ -3,6 +3,9 @@
  * Handles redirect in exception handler
  * for unauthorized requests
  */
+
+use App\Models\Role;
+
 Route::redirect('login', '/guest/login')
     ->name('login');
 
@@ -20,7 +23,7 @@ Route::prefix('guest')->group(function () {
         Route::post('register', 'GuestRegistrationController@register')->name('guest-register');
     });
 
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth', 'hasRole:' . Role::GUEST_ROLE])->group(function () {
         Route::get('home', function () {
             return view('home');
         })->name('guest-home');
@@ -37,7 +40,7 @@ Route::prefix('host')->group(function () {
         Route::post('register', 'HostRegistrationController@register')->name('host-register');
     });
 
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth', 'hasRole:' . Role::HOST_ROLE])->group(function () {
         Route::get('home', function () {
             return view('home');
         })->name('host-home');
@@ -54,7 +57,7 @@ Route::prefix('admin')->group(function () {
         Route::post('register', 'AdminRegistrationController@register')->name('admin-register');
     });
 
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth', 'hasRole:' . Role::ADMIN_ROLE])->group(function () {
         Route::get('home', function () {
             return view('home');
         })->name('admin-home');
