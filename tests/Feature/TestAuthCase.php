@@ -25,19 +25,25 @@ abstract class TestAuthCase extends TestCase
 
     protected function createUser($email = null, $role = null)
     {
-        $email = !is_null($email) ?: $this->getCorrectEmail();
-        $role = !is_null($role) ?: $this->getCorrectRole();
+        $email = $email ?? $this->getCorrectEmail();
 
         /** @var User $user */
         $user = factory(User::class)->create([
             'email' => $email
         ]);
 
-        $role = factory(Role::class)->create([
+        $user->roles()->save($this->createRole($role));
+
+        return $user;
+    }
+
+    protected function createRole($role = null)
+    {
+        $role = $role ?? $this->getCorrectRole();
+
+        return factory(Role::class)->create([
             'name' => $role
         ]);
-
-        $user->roles()->save($role);
     }
 
 }
