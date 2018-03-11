@@ -37,4 +37,30 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function hasRole($roleName): bool
+    {
+        return $this->findRoles([$roleName])->isNotEmpty();
+    }
+
+    public function hasAtLeastOneRole(array $roleNames): bool
+    {
+        return $this->findRoles($roleNames, true)->isNotEmpty();
+    }
+
+    public function hasAllRoles(array $roleNames): bool
+    {
+        return count($this->findRoles($roleNames)) === count($roleNames);
+    }
+
+    private function findRoles(array $roleNames, bool $firstMatch = false)
+    {
+        $callback = function (Role $role) use ($roleNames) {
+            return in_array($role->name, $roleNames);
+        };
+
+        return $firstMatch ?
+            $this->roles->first($callback) :
+            $this->roles->filter($callback);
+    }
 }
