@@ -21,6 +21,14 @@ class GuestLoginController extends AbstractLoginController
      */
     public function getAuthViewName(): string
     {
-        return 'auth.guestLogin';
+        return 'auth.login';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function redirectTo(): string
+    {
+        return route('guestHome');
     }
 }

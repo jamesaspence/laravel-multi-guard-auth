@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth\Register;
 
 use App\Http\Controllers\Auth\HandlesRoleBasedAuth;
+use App\Models\Role;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Hash;
@@ -68,10 +69,17 @@ abstract class AbstractRegistrationController extends Controller implements Hand
      */
     protected function create(array $data)
     {
-        return User::create([
+        $role = Role::where('name', '=', $this->getGuardName())
+            ->firstOrFail();
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $user->roles()->save($role);
+
+        return $user;
     }
 }
