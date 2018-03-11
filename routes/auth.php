@@ -23,6 +23,6 @@ Route::prefix('guest')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('home', function () {
             return 'Home!';
-        })->name('guestHome');
+        })->name('guest-home');
     });
 });

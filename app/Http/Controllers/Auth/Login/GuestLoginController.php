@@ -29,6 +29,6 @@ class GuestLoginController extends AbstractLoginController
      */
     public function redirectTo(): string
     {
-        return route('guestHome');
+        return route('guest-home');
     }
 }

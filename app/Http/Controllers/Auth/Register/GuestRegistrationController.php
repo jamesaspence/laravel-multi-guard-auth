@@ -32,6 +32,6 @@ class GuestRegistrationController extends AbstractRegistrationController
      */
     public function redirectTo(): string
     {
-        return route('guestHome');
+        return route('guest-home');
     }
 }
