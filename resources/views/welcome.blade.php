@@ -7,7 +7,7 @@
                 Multi Guard Example
             </div>
 
-            <a class="project-link" href="https://github.com/jamesaspence/laravel-multi-guard-auth">
+            <a target="_blank" class="project-link" href="https://github.com/jamesaspence/laravel-multi-guard-auth">
                 https://github.com/jamesaspence/laravel-multi-guard-auth
             </a>
 
