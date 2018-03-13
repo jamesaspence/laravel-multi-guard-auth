@@ -4,8 +4,12 @@
     <div class="flex-center position-ref full-height">
         <div class="content">
             <div class="title m-b-md">
-                Laravel
+                Multi Guard Example
             </div>
+
+            <a class="project-link" href="https://github.com/jamesaspence/laravel-multi-guard-auth">
+                https://github.com/jamesaspence/laravel-multi-guard-auth
+            </a>
 
             <div class="links">
                 <a href="https://laravel.com/docs">Documentation</a>
